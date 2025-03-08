@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #0d0d0d; /* Darker background */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Card Styles */
+        .card {
+            border-radius: 15px;
+            background-color: #1b1b1b;
+            color: #ffffff;
+            padding: 40px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Heading */
+        h1 {
+            color: #007bff; /* Blue color */
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Layout */
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .form-control {
+            background-color: #2e2e2e;
+            border: 1px solid #444;
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 5px;
+            width: 48%; /* Half-width inputs */
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .form-control::placeholder {
+            color: #aaaaaa;
+        }
+
+        /* Full-Width Inputs */
+        .full-width {
+            width: 100%;
+        }
+
+        /* Button Styles */
+        .btn {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Prediction Result */
+        h2 {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+
+        /* Default Result Color */
+        #result-text {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Diabetes Prediction</h1>
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+            
+            <div class="  .form-group {
+              width: 70%;
+              margin: 0 auto;
+          }">
+                <input type="text" name="Pregnancies" class="form-control" placeholder="Pregnancies" required>
+                <input type="text" name="Glucose" class="form-control" placeholder="Glucose" required>
+            </div>
+            
+            <div class="  .form-group {
+              width: 70%;
+              margin: 0 auto;
+          }">
+                <input type="text" name="BloodPressure" class="form-control" placeholder="Blood Pressure" required>
+                <input type="text" name="SkinThickness" class="form-control" placeholder="Skin Thickness" required>
+            </div>
+            
+            <div class=".form-group {
+              width: 70%;
+              margin: 0 auto;
+          }">
+                <input type="text" name="Insulin" class="form-control" placeholder="Insulin" required>
+                <input type="text" name="BMI" class="form-control" placeholder="BMI" required>
+            </div>
+            
+            <div class=".form-group {
+              width: 70%;
+              margin: 0 auto;
+          }">
+                <input type="text" name="DiabetesPedigreeFunction" class="form-control" placeholder="Diabetes Pedigree Function" required>
+                <input type="text" name="Age" class="form-control" placeholder="Age" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        <h2>The person is <span id="result-text">{{ result }}</span></h2>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var resultText = document.getElementById("result-text").innerText;
+
+            // Convert to lowercase and trim spaces
+            var resultLower = resultText.toLowerCase().trim();
+
+            // Get the result container
+            var resultElement = document.getElementById("result-text");
+
+            // Check the condition for diabetic (red) and non-diabetic (green)
+            if (resultLower === "diabetic") {
+                resultElement.style.color = "red"; // Red for diabetic
+            } else if (resultLower === "non-diabetic") {
+                resultElement.style.color = "green"; // Green for non-diabetic
+            }
+        });
+    </script>
+
+</body>
+</html>

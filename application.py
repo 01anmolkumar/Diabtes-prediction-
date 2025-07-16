@@ -5,8 +5,9 @@ import pandas as pd
 
 application = Flask(__name__)  # Single app object
 
-scaler = pickle.load(open("Model/standardScalar.pkl", "rb"))
-model = pickle.load(open("Model/modelForPrediction.pkl", "rb"))
+# ✅ Lowercase folder path (model/)
+scaler = pickle.load(open("model/standardScalar.pkl", "rb"))
+model = pickle.load(open("model/modelForPrediction.pkl", "rb"))
 
 @application.route('/')
 def index():
